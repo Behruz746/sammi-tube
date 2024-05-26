@@ -2,7 +2,7 @@ import React from "react";
 import { SearchBar } from "./";
 import { NavLink } from "react-router-dom";
 import { Stack, Box } from "@mui/material";
-import { logo } from "../constants/index";
+import { logo } from "../constants/category";
 import { colors } from "../constants/colors";
 
 function Navbar() {

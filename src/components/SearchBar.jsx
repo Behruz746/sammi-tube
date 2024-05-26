@@ -13,7 +13,7 @@ function SearchBar() {
         boxShadow: "none",
       }}
     >
-      <input type="text" placeholder="search..." />
+      <input type="text" placeholder="search..." className="search-bar" />
       <IconButton>
         <Search />
       </IconButton>
