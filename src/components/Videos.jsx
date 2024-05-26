@@ -9,14 +9,14 @@ function Videos({ videos }) {
       width={"100%"}
       direction={"row"}
       flexWrap={"wrap"}
-      justifyContent={"start"}
+      justifyContent={"center"}
       alignItems={"center"}
       gap={2}
     >
       {videos?.map((item) => (
         <Box key={uuidv4()}>
           {item.id.videoId && <VideosCard video={item} />}
-          {item.snippet.channelId && <ChannelCard video={item} />}
+          {item.id.channelId && <ChannelCard video={item} />}
         </Box>
       ))}
     </Stack>

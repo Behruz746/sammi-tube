@@ -4,3 +4,4 @@ export { default as Category } from "./Category";
 export { default as Videos } from "./Videos";
 export { default as VideosCard } from "./VideosCard";
 export { default as ChannelCard } from "./ChannelCard";
+export { default as Loader } from "./Loader";

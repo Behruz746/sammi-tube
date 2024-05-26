@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // componets
-import { Category, Videos } from "../components";
+import { Category, Loader, Videos } from "../components";
 // API service
 import { ApiService } from "../service/api.service";
 // ui elements
@@ -10,16 +10,19 @@ import { colors } from "../constants/colors";
 
 function Home() {
   const [videos, setVideos] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("Web Developers");
+  const [load, setLoad] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("Developers");
   const selectCategoryHandler = (category) => setSelectedCategory(category);
 
   useEffect(() => {
+    setLoad(false);
     const getData = async () => {
       try {
         const data = await ApiService.fetching(
           `search?part=snippet&q=${selectedCategory}`
         );
         setVideos(data.data.items);
+        setLoad(true);
       } catch (error) {
         console.log(error);
       }
@@ -28,6 +31,10 @@ function Home() {
     getData();
   }, [selectedCategory]);
   console.log(videos);
+
+  if (!load) {
+    return <Loader />;
+  }
 
   return (
     <Stack>

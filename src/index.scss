@@ -119,3 +119,29 @@ input[type="search"]::-webkit-search-cancel-button {
     color: #fff !important;
   }
 }
+.loader-contaier {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid;
+  border-color: #000 #0000;
+  animation: l1 1s infinite;
+}
+@keyframes l1 {
+  to {
+    transform: rotate(0.5turn);
+  }
+}
+@media screen and (max-width: 600px) {
+  .search-bar {
+    width: 200px;
+  }
+}
