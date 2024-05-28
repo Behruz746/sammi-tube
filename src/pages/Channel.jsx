@@ -29,9 +29,6 @@ function Channel() {
     getData();
   }, [channel]);
 
-  console.log(channelDetail);
-  console.log(vieos);
-
   return (
     <Box minHeight={"95vh"} mt={"1vh"}>
       <Box>

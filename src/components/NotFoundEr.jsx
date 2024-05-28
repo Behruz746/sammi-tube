@@ -2,7 +2,7 @@ import React from "react";
 import { Typography } from "@mui/material";
 
 const NotFoundEr = ({ error }) => (
-  <div className="loader-container">
+  <div className="error-container">
     <Typography variant="h4" fontWeight={"bold"} p={2}>
       Error:{" "}
       {error?.request?.status === 0

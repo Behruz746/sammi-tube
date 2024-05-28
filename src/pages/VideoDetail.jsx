@@ -23,7 +23,6 @@ function VideoDetail() {
   const [error, setError] = useState([]);
 
   useEffect(() => {
-    // setNotFount(true);
     setLoad(false);
     const getData = async () => {
       try {
@@ -43,8 +42,6 @@ function VideoDetail() {
         // const dataCom = await ApiService.fetching(
         //   `commentThreads?part=snippet&videoId=${id}`
         // );
-
-        console.log(dataCom);
         setLoad(true);
       } catch (error) {
         console.error(error);
@@ -56,8 +53,6 @@ function VideoDetail() {
 
     getData();
   }, [id]);
-
-  console.log(video);
 
   const {
     snippet: { title, channelTitle, description, tags } = {},
