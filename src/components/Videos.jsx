@@ -9,7 +9,7 @@ function Videos({ videos }) {
       width={"100%"}
       direction={"row"}
       flexWrap={"wrap"}
-      justifyContent={"center"}
+      justifyContent={"flex-start"}
       alignItems={"center"}
       gap={2}
     >

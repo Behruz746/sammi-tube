@@ -5,3 +5,4 @@ export { default as Videos } from "./Videos";
 export { default as VideosCard } from "./VideosCard";
 export { default as ChannelCard } from "./ChannelCard";
 export { default as Loader } from "./Loader";
+export { default as NotFoundEr } from "./NotFoundEr";

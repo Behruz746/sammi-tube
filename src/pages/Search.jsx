@@ -27,6 +27,8 @@ function Search() {
     getData();
   }, [value]);
 
+  console.log(videos);
+
   if (!load) {
     return <Loader />;
   }

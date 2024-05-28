@@ -7,6 +7,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { NavLink } from "react-router-dom";
 import { colors } from "../constants/colors";
 import moment from "moment";
 import { CheckCircle } from "@mui/icons-material";
@@ -20,17 +21,22 @@ function VideosCard({ video }) {
         borderRadius: 0,
       }}
     >
-      <CardMedia
-        loading={"lazy"}
-        image={video?.snippet?.thumbnails?.high?.url}
-        alt={video?.snippet?.channelTitle}
-        sx={{
-          width: { xs: "100%", sm: "360px", md: "320px" },
-          height: "180px",
-        }}
-        width={360}
-        height={180}
-      />
+      <NavLink
+        to={`/video/${video?.id?.videoId}`}
+        style={{ cursor: "pointer" }}
+      >
+        <CardMedia
+          loading={"lazy"}
+          image={video?.snippet?.thumbnails?.high?.url}
+          alt={video?.snippet?.channelTitle}
+          sx={{
+            width: { xs: "100%", sm: "360px", md: "320px" },
+            height: "180px",
+          }}
+          width={360}
+          height={180}
+        />
+      </NavLink>
       <CardContent
         sx={{
           backgroundColor: colors.primary,
@@ -49,7 +55,7 @@ function VideosCard({ video }) {
             {video?.snippet?.description.slice(0, 70)}
           </Typography>
         </>
-        <>
+        <NavLink to={`/channel/${video?.snippet?.channelId}`}>
           <Stack
             direction={"row"}
             position={"absolute"}
@@ -65,7 +71,7 @@ function VideosCard({ video }) {
               />
             </Typography>
           </Stack>
-        </>
+        </NavLink>
       </CardContent>
     </Card>
   );

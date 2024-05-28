@@ -33,7 +33,7 @@ function SearchBar() {
         onChange={(e) => setInputVal(e.target.value)}
         value={inputVal}
       />
-      <IconButton type="submit">
+      <IconButton type="submit" title="search">
         <Search />
       </IconButton>
     </Paper>
