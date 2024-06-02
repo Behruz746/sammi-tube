@@ -8,7 +8,7 @@ import {
   Visibility,
 } from "@mui/icons-material";
 import { ApiService } from "../service/api.service";
-import { Loader, NotFoundEr, Videos } from "../components";
+import { Loader, Videos } from "../components";
 import { NavLink } from "react-router-dom";
 import { useParams } from "react-router";
 import ReactPlayer from "react-player/lazy";
@@ -19,8 +19,6 @@ function VideoDetail() {
   const [channelImg, setChannelImg] = useState([]);
   const [relate, setRelate] = useState([]);
   const [load, setLoad] = useState(false);
-  const [notFountm, setNotFount] = useState(true);
-  const [error, setError] = useState([]);
 
   useEffect(() => {
     setLoad(false);
@@ -45,9 +43,7 @@ function VideoDetail() {
         setLoad(true);
       } catch (error) {
         console.error(error);
-        setError(error);
         setLoad(true);
-        setNotFount(false);
       }
     };
 
@@ -64,113 +60,102 @@ function VideoDetail() {
   }
 
   return (
-    <>
-      {notFountm ? (
-        <NotFoundEr error={error} />
-      ) : (
-        <Box minHeight={"90vh"} mb={10}>
-          <Box
-            display={"flex"}
-            sx={{ flexDirection: { xs: "column", md: "row" } }}
-          >
-            <Box width={{ xs: "100%", md: "75%" }}>
-              <ReactPlayer
-                url={`https://www.youtube.com/watch?v=${id}`}
-                className={"react-player"}
-                controls
-              />
-              {tags?.map((item, idx) => (
-                <Chip
-                  label={item}
-                  key={idx}
-                  sx={{ mt: "10px", cursor: "pointer", ml: "10px" }}
-                  deleteIcon={<Tag />}
-                  onDelete={() => {}}
-                  variant="outlined"
-                ></Chip>
-              ))}
+    <Box minHeight={"90vh"} mb={10}>
+      <Box display={"flex"} sx={{ flexDirection: { xs: "column", md: "row" } }}>
+        <Box width={{ xs: "100%", md: "75%" }}>
+          <ReactPlayer
+            url={`https://www.youtube.com/watch?v=${id}`}
+            className={"react-player"}
+            controls
+          />
+          {tags?.map((item, idx) => (
+            <Chip
+              label={item}
+              key={idx}
+              sx={{ mt: "10px", cursor: "pointer", ml: "10px" }}
+              deleteIcon={<Tag />}
+              onDelete={() => {}}
+              variant="outlined"
+            ></Chip>
+          ))}
 
-              <Typography variant="h5" fontWeight={"bold"} p={2}>
-                {title}
-              </Typography>
-              <Typography variant="subtitle2" p={2} sx={{ opacity: "0.7" }}>
-                {description}
-              </Typography>
+          <Typography variant="h5" fontWeight={"bold"} p={2}>
+            {title}
+          </Typography>
+          <Typography variant="subtitle2" p={2} sx={{ opacity: "0.7" }}>
+            {description}
+          </Typography>
+          <Stack
+            direction={"row"}
+            gap={"20px"}
+            alignItems={"center"}
+            py={1}
+            px={2}
+          >
+            <Stack
+              sx={{ opacity: 0.7 }}
+              direction={"row"}
+              alignItems={"cemter"}
+              gap={"3px"}
+            >
+              <Visibility />
+              {parseInt(viewCount).toLocaleString()} views
+            </Stack>
+            <Stack
+              sx={{ opacity: 0.7 }}
+              direction={"row"}
+              alignItems={"cemter"}
+              gap={"3px"}
+            >
+              <FavoriteOutlined />
+              {parseInt(likeCount).toLocaleString()} like
+            </Stack>
+            <Stack
+              sx={{ opacity: 0.7 }}
+              direction={"row"}
+              alignItems={"cemter"}
+              gap={"3px"}
+            >
+              <MarkChatRead />
+              {parseInt(commentCount).toLocaleString()} comment
+            </Stack>
+          </Stack>
+          <Stack direction={"row"} py={1} px={2}>
+            <NavLink to={`/channel/${video?.snippet?.channelId}`}>
               <Stack
                 direction={"row"}
-                gap={"20px"}
                 alignItems={"center"}
-                py={1}
-                px={2}
+                gap={"5px"}
+                marginTop={"5px"}
               >
-                <Stack
-                  sx={{ opacity: 0.7 }}
-                  direction={"row"}
-                  alignItems={"cemter"}
-                  gap={"3px"}
-                >
-                  <Visibility />
-                  {parseInt(viewCount).toLocaleString()} views
-                </Stack>
-                <Stack
-                  sx={{ opacity: 0.7 }}
-                  direction={"row"}
-                  alignItems={"cemter"}
-                  gap={"3px"}
-                >
-                  <FavoriteOutlined />
-                  {parseInt(likeCount).toLocaleString()} like
-                </Stack>
-                <Stack
-                  sx={{ opacity: 0.7 }}
-                  direction={"row"}
-                  alignItems={"cemter"}
-                  gap={"3px"}
-                >
-                  <MarkChatRead />
-                  {parseInt(commentCount).toLocaleString()} comment
-                </Stack>
+                <Avatar src={channelImg?.snippet?.thumbnails?.medium?.url} />
+                <Typography variant="subtitle2" color={"gray"}>
+                  {channelTitle}
+                  <CheckCircle
+                    sx={{
+                      fontSize: "12px",
+                      color: "gray",
+                      marginLeft: "5px",
+                    }}
+                  />
+                </Typography>
               </Stack>
-              <Stack direction={"row"} py={1} px={2}>
-                <NavLink to={`/channel/${video?.snippet?.channelId}`}>
-                  <Stack
-                    direction={"row"}
-                    alignItems={"center"}
-                    gap={"5px"}
-                    marginTop={"5px"}
-                  >
-                    <Avatar
-                      src={channelImg?.snippet?.thumbnails?.medium?.url}
-                    />
-                    <Typography variant="subtitle2" color={"gray"}>
-                      {channelTitle}
-                      <CheckCircle
-                        sx={{
-                          fontSize: "12px",
-                          color: "gray",
-                          marginLeft: "5px",
-                        }}
-                      />
-                    </Typography>
-                  </Stack>
-                </NavLink>
-              </Stack>
-            </Box>
-            <Box
-              width={{ xs: "100%", md: "25%" }}
-              px={2}
-              py={{ md: 1, xs: 5 }}
-              justifyContent={"center"}
-              alignItems={"center"}
-              overflow={"scroll"}
-              maxHeight={"100vh"}
-            >
-              {relate && <Videos videos={relate} />}
-            </Box>
-          </Box>
+            </NavLink>
+          </Stack>
         </Box>
-      )}
-    </>
+        <Box
+          width={{ xs: "100%", md: "25%" }}
+          px={2}
+          py={{ md: 1, xs: 5 }}
+          justifyContent={"center"}
+          alignItems={"center"}
+          overflow={"scroll"}
+          maxHeight={"100vh"}
+        >
+          {relate && <Videos videos={relate} />}
+        </Box>
+      </Box>
+    </Box>
   );
 }
 
